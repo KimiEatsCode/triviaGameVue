@@ -100,7 +100,7 @@
 </template>
 
 <script>
- import axios from "axios";
+ import { apiClient } from "../store";
 
 export default {
   name: "CategoryClues",
@@ -152,14 +152,12 @@ export default {
       form: {
         name: "",
       },
-      clues: axios
-        .get(`${this.$store.state.url}/api/category-clues/user/${this.userid}/${this.categoryid}`)
+      clues: apiClient
+        .get(`/api/category-clues/user/${this.userid}/${this.categoryid}`)
         .then((res) => {
 
           if (res.data === "") {
-            console.log(
-              "Game clues data response is EMPTY " + this.$store.state.url
-            );
+            console.log("Game clues data response is EMPTY");
           } else {
             this.$store.state.clues = res.data;
 

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { apiClient } from "../store";
 import CategoryClues from "./CategoryClues.vue";
 
 export default {
@@ -43,8 +43,8 @@ computed: {
     return {
       getResponse: false,
       gameScore: this.$store.state.gamescore,
-      categories: axios
-        .get(`${this.$store.state.url}/api/games/${this.gameid}/categories`)
+      categories: apiClient
+        .get(`/api/games/${this.gameid}/categories`)
         .then((res) => {
           this.getResponse = true;
           console.log("Get categories info " + JSON.stringify(res.data));
